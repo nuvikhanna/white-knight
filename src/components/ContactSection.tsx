@@ -1,12 +1,29 @@
 import { useState } from "react";
 import { Phone, Mail, MapPin, Facebook } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 const ContactSection = () => {
   const [form, setForm] = useState({ name: "", phone: "", email: "", location: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
+    const { error } = await supabase.from("contact_submissions").insert({
+      name: form.name,
+      phone: form.phone || null,
+      email: form.email,
+      location: form.location || null,
+      message: form.message,
+    });
+    setLoading(false);
+    if (error) {
+      toast({ title: "Something went wrong", description: "Please try again or call us directly.", variant: "destructive" });
+      return;
+    }
     setSubmitted(true);
   };
 
