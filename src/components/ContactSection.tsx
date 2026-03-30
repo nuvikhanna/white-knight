@@ -92,9 +92,10 @@ const ContactSection = () => {
                 />
                 <button
                   type="submit"
-                  className="w-full bg-primary hover:bg-forest-light text-primary-foreground font-semibold py-3.5 rounded-lg transition-colors text-sm"
+                  disabled={loading}
+                  className="w-full bg-primary hover:bg-forest-light text-primary-foreground font-semibold py-3.5 rounded-lg transition-colors text-sm disabled:opacity-60"
                 >
-                  Send My Enquiry
+                  {loading ? "Sending…" : "Send My Enquiry"}
                 </button>
                 <p className="text-xs text-muted-foreground text-center">
                   We aim to respond to all enquiries within one working day.
