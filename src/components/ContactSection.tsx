@@ -19,6 +19,25 @@ const ContactSection = () => {
       location: form.location || null,
       message: form.message,
     });
+
+    // Also send to Google Sheets
+    try {
+      await fetch("https://script.google.com/macros/s/AKfycbzhPBhizuCVP5ej1a7ZqWNsUqVf8HZGgFmP6GcicocUzmMRjOhepHQGJQPRDX5yy-_T/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          phone: form.phone || "",
+          email: form.email,
+          location: form.location || "",
+          message: form.message,
+          timestamp: new Date().toISOString(),
+        }),
+      });
+    } catch (e) {
+      console.error("Google Sheets sync failed:", e);
+    }
     setLoading(false);
     if (error) {
       toast({ title: "Something went wrong", description: "Please try again or call us directly.", variant: "destructive" });
