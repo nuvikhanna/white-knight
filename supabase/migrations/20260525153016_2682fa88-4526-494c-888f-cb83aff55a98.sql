@@ -1,0 +1,1 @@
+DROP POLICY IF EXISTS "Allow authenticated reads" ON public.contact_submissions;
