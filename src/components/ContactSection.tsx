@@ -22,7 +22,7 @@ const ContactSection = () => {
 
     // Also send to Google Sheets
     try {
-      await fetch("https://script.google.com/macros/s/AKfycbxftZgt_FZphB_wkmwl0ldNYbqBNUWEZj-u0RBFxp8P01D0NgwrgjGKzGO46NlBBBPFHg/exec", {
+      await fetch("https://script.google.com/macros/s/AKfycbwym2S__zAJVGqG2CTZo38HP-g9ItVSeUbIC5YONUYYUkXPDzi0-sOvJLu8XL2KZYab_Q/exec", {
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "application/json" },
